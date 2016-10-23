@@ -1,6 +1,8 @@
 package co.jp.tagbangers.core.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Field;
@@ -11,6 +13,8 @@ import javax.persistence.*;
 @NamedEntityGraph
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User extends AbstractEntity<Long> {
 
 	public enum Gender {

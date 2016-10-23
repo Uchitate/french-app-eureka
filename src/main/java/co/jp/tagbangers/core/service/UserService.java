@@ -33,12 +33,7 @@ public class UserService {
 	}
 
 	public User createUser(UserCreateRequest request) {
-		User user = new User();
-		user.setName(request.getName());
-		user.setPassword(passwordEncoder.encode(request.getPassword()));
-		user.setEmail(request.getEmail());
-		user.setAge(request.getAge());
-		user.setGender(request.getGender());
+		User user = new User(request.getName(), passwordEncoder.encode(request.getPassword()), request.getEmail(), request.getAge(), request.getGender());
 		return userRepository.saveAndFlush(user);
 	}
 
