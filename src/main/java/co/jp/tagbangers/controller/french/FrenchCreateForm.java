@@ -23,7 +23,7 @@ public class FrenchCreateForm implements Serializable {
 
 	private String address;
 
-	public FrenchCreateRequest toUserCreateRequest() {
+	public FrenchCreateRequest toFrenchCreateRequest() {
 		FrenchCreateRequest request = new FrenchCreateRequest();
 		request.setName(getName());
 		request.setPassword(getPassword());

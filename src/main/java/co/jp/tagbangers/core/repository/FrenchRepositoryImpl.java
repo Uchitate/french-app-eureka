@@ -20,20 +20,14 @@ public class FrenchRepositoryImpl implements FrenchRepositoryCustom {
 
 	@Override
 	public List<French> search(FrenchSearchRequest request) {
-		List<French> users;
+		List<French> frenches;
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<French> query = builder.createQuery(French.class);
 		Root<French> root = query.from(French.class);
 
 		List<Predicate> where = new ArrayList<>();
 		if (StringUtils.hasText(request.getName())) {
-//			where.add(builder.equal(root.get(User_.name), request.getName()));
-		}
-		if (request.getAgeStart() != null && request.getAgeEnd() != null) {
-//			where.add(builder.between(root.get(User_.age), request.getAgeStart(), request.getAgeEnd()));
-		}
-		if (request.getGender() != null) {
-//			where.add(builder.equal(root.get(User_.gender), request.getGender()));
+//			where.add(builder.equal(root.get(French_.name), request.getName()));
 		}
 
 		query.where(where.toArray(new Predicate[where.size()]));

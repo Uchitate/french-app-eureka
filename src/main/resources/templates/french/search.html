@@ -13,60 +13,52 @@
   <script src="/static/resources/lib/jquery.min.js"></script>
   <script src="/static/resources/lib/Semantic-UI/2.1.8/semantic.min.js"></script>
 
-  <title>ユーザ一覧</title>
+  <title>フレンチ一覧</title>
 </head>
 <body>
 <div class="ui text container">
   <div colspan="4">
     <a th:href="@{/logout}"><div class="ui right floated small red labeled icon button"><i class="sign out icon"></i>ログアウト</div></a>
   </div>
-  <h2 class="ui header aligned blue">ユーザ一覧</h2>
-  <form method="post" th:action="@{/users}" th:object="${form}">
+  <h2 class="ui header aligned blue">フレンチ一覧</h2>
+  <form method="post" th:action="@{/frenches}" th:object="${form}">
     <div class="ui search">
       <div class="ui icon input small">
         <input class="prompt" th:field="*{name}" type="text" placeholder="名前を入力"/>
       </div>
-      <div class="ui icon input small">
-        <select class="ui search dropdown" th:field="*{gender}">
-          <option value="">性別を選択</option>
-          <option th:each="gender : ${genders}" th:text="#{|user.field.gender.${gender}|}" th:value="${gender}"></option>
-        </select>
-      </div>
       <button class="ui small button">検索</button>
     </div>
   </form>
-  <div class="ui success message" th:if="${savedUser}">
-    <div><p th:text="|${savedUser.name}を登録しました！|"></p></div>
+  <div class="ui success message" th:if="${savedFrench}">
+    <div><p th:text="|${savedFrench.name}を登録しました！|"></p></div>
   </div>
-  <div class="ui success message" th:if="${updatedUser}">
-    <div><p th:text="|${updatedUser.name}を更新しました！|"></p></div>
+  <div class="ui success message" th:if="${updatedFrench}">
+    <div><p th:text="|${updatedFrench.name}を更新しました！|"></p></div>
   </div>
-  <div class="ui success message" th:if="${deletedUser}">
-    <div><p th:text="|${deletedUser}を削除しました！|"></p></div>
+  <div class="ui success message" th:if="${deletedFrench}">
+    <div><p th:text="|${deletedFrench}を削除しました！|"></p></div>
   </div>
-  <p th:if="${#lists.isEmpty(users)}" th:text="#{user.search.result.empty}">なし</p>
-  <table th:unless="${#lists.isEmpty(users)}" class="ui celled blue table">
+  <p th:if="${#lists.isEmpty(frenches)}" th:text="#{french.search.result.empty}">なし</p>
+  <table th:unless="${#lists.isEmpty(frenches)}" class="ui celled blue table">
     <thead>
     <tr>
       <th>名前</th>
       <th>メール</th>
-      <th>年齢</th>
-      <th>性別</th>
+      <th>住所</th>
       <th></th>
       <th></th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="user : ${users}">
-      <td th:text="${user.name}">山田太郎</td>
-      <td th:text="${user.email}">yamada@taro.co.jp</td>
-      <td th:text="${user.age}">20</td>
-      <td th:text="#{|user.field.gender.${user.gender}|}">男性</td>
+    <tr th:each="french : ${frenches}">
+      <td th:text="${french.name}">山田太郎</td>
+      <td th:text="${french.email}">yamada@taro.co.jp</td>
+      <td th:text="${french.address}">横浜</td>
       <td>
-        <a th:href="@{/users/edit/{id}(id=${user.id})}"><button class="ui orange basic button">編集</button></a>
+        <a th:href="@{/frenches/edit/{id}(id=${french.id})}"><button class="ui orange basic button">編集</button></a>
       </td>
       <td>
-        <form method="post" th:action="@{/users/delete/{id}(id=${user.id})}">
+        <form method="post" th:action="@{/frenches/delete/{id}(id=${french.id})}">
           <input type="hidden" name="_method" value="delete"/>
           <button class="ui grey basic button">削除</button>
         </form>
@@ -75,7 +67,7 @@
     </tbody>
   </table>
   <div colspan="4">
-      <a th:href="@{/users/new}"><div class="ui right floated small primary labeled icon button"><i class="user icon"></i>新規登録</div></a>
+      <a th:href="@{/french/new}"><div class="ui right floated small primary labeled icon button"><i class="user icon"></i>新規登録</div></a>
   </div>
 </div>
 </body>

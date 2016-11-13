@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Arrays;
+import static java.util.Optional.ofNullable;
 
 @Controller
-@RequestMapping("/users/new")
+@RequestMapping("/frenches/new")
 public class FrenchCreateController {
 
 	public static final String FORM_MODEL_KEY = "form";
@@ -24,24 +24,19 @@ public class FrenchCreateController {
 	public static final String ERRORS_MODEL_KEYS = BindingResult.MODEL_KEY_PREFIX + FORM_MODEL_KEY;
 
 	@Autowired
-	FrenchService userService;
+	FrenchService frenchService;
 
 	@ModelAttribute(FORM_MODEL_KEY)
-	public FrenchCreateForm setupUserCreateForm() {
+	public FrenchCreateForm setupFrenchCreateForm() {
 		return new FrenchCreateForm();
-	}
-
-	@ModelAttribute("genders")
-	public French.Gender[] setupGender() {
-		French.Gender[] genders = French.Gender.values();
-		return Arrays.copyOfRange(genders, 0, genders.length);
 	}
 
 	@GetMapping
 	public String input(Model model) {
 		FrenchCreateForm form = (FrenchCreateForm) model.asMap().get(FORM_MODEL_KEY);
+		form = ofNullable(form).orElse(new FrenchCreateForm());
 		model.addAttribute("form", form);
-		return "user/create";
+		return "french/create";
 	}
 
 	@PostMapping
@@ -52,12 +47,12 @@ public class FrenchCreateController {
 		redirectAttributes.addFlashAttribute(FORM_MODEL_KEY, form);
 		redirectAttributes.addFlashAttribute(ERRORS_MODEL_KEYS, errors);
 		if (errors.hasErrors()) {
-			return "redirect:/users/new?error";
+			return "redirect:/frenches/new?error";
 		}
-		French savedUser = userService.createUser(form.toUserCreateRequest());
+		French savedFrench = frenchService.create(form.toFrenchCreateRequest());
 		redirectAttributes.getFlashAttributes().clear();
-		redirectAttributes.addFlashAttribute("savedUser", savedUser);
+		redirectAttributes.addFlashAttribute("savedFrench", savedFrench);
 
-		return "redirect:/users";
+		return "redirect:/frenches";
 	}
 }

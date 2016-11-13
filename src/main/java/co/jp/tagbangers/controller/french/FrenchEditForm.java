@@ -7,7 +7,6 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Getter
@@ -20,27 +19,21 @@ public class FrenchEditForm implements Serializable {
 	@Email
 	private String email;
 
-	private Integer age;
+	private String address;
 
-	@NotNull
-	private French.Gender gender;
+	public FrenchEditForm() {}
 
-	public FrenchEditForm() {
+	public FrenchEditForm(French french) {
+		this.name = french.getName();
+		this.email = french.getEmail();
+		this.address = french.getAddress();
 	}
 
-	public FrenchEditForm(French user) {
-		this.name = user.getName();
-		this.email = user.getEmail();
-		this.age = user.getAge();
-		this.gender = user.getGender();
-	}
-
-	public FrenchUpdateRequest toUserUpdateRequest() {
+	public FrenchUpdateRequest toFrenchUpdateRequest() {
 		FrenchUpdateRequest request = new FrenchUpdateRequest();
 		request.setName(getName());
 		request.setEmail(getEmail());
-		request.setAge(getAge());
-		request.setGender(getGender());
+		request.setAddress(getAddress());
 		return request;
 	}
 }

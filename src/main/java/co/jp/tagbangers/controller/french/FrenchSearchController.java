@@ -14,39 +14,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/frenches")
 public class FrenchSearchController {
 
 	public static final String FORM_MODEL_KEY = "form";
 
 	@Autowired
-	private FrenchService userService;
+	private FrenchService frenchService;
 
 	@ModelAttribute(FORM_MODEL_KEY)
-	public FrenchSearchForm setUserSearchFrom() {
+	public FrenchSearchForm setFrenchSearchFrom() {
 		return new FrenchSearchForm();
-	}
-
-	@ModelAttribute("genders")
-	public French.Gender[] setupGender() {
-		French.Gender[] genders = French.Gender.values();
-//		return Arrays.copyOfRange(genders, 0, genders.length);
-		return genders;
 	}
 
 	@GetMapping
 	public String index(Model model) {
-		List<French> users = userService.allUsers();
-		model.addAttribute("users", users);
-		return "user/search";
+		List<French> frenches = frenchService.allFrenches();
+		model.addAttribute("frenches", frenches);
+		return "french/search";
 	}
 
 	@PostMapping
 	public String search(
 			@Validated @ModelAttribute(FORM_MODEL_KEY) FrenchSearchForm form,
 			Model model) {
-		List<French> users = userService.searchUsers(form.toUserSearchRequest());
-		model.addAttribute("users", users);
-		return "user/search";
+		List<French> frenches = frenchService.searchFrenches(form.toFrenchSearchRequest());
+		model.addAttribute("frenches", frenches);
+		return "french/search";
 	}
 }

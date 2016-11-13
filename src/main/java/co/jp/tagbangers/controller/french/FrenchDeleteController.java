@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/users/delete/{id}")
+@RequestMapping("/frenches/delete/{id}")
 public class FrenchDeleteController {
 
 	@Autowired
-	FrenchService userService;
+	FrenchService frenchService;
 
 	@DeleteMapping
 	public String delete(
 			@PathVariable Long id,
 			RedirectAttributes redirectAttributes) {
-		String deletedUser = userService.deleteUser(id);
-		deletedUser = userService.searchUser(id) == null ? deletedUser : null;
-		redirectAttributes.addFlashAttribute("deletedUser", deletedUser);
-		return "redirect:/users";
+		String deletedFrench = frenchService.delete(id);
+		deletedFrench = frenchService.searchFrench(id) == null ? deletedFrench : null;
+		redirectAttributes.addFlashAttribute("deletedFrench", deletedFrench);
+		return "redirect:/frenches";
 	}
 }

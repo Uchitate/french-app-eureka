@@ -1,6 +1,5 @@
 package co.jp.tagbangers.core.model;
 
-import co.jp.tagbangers.core.entity.French;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +13,5 @@ public class FrenchUpdateRequest {
 
 	private String email;
 
-	private Integer age;
-
-	private French.Gender gender;
+	private String address;
 }

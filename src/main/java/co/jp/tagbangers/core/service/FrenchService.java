@@ -15,41 +15,40 @@ import java.util.List;
 public class FrenchService {
 
 	@Autowired
-	FrenchRepository userRepository;
+	FrenchRepository frenchRepository;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
-	public List<French> allUsers() {
-		return userRepository.findAll();
+	public List<French> allFrenches() {
+		return frenchRepository.findAll();
 	}
 
-	public List<French> searchUsers(FrenchSearchRequest request) {
-		return userRepository.search(request);
+	public List<French> searchFrenches(FrenchSearchRequest request) {
+		return frenchRepository.search(request);
 	}
 
-	public French searchUser(long id) {
-		return userRepository.findById(id);
+	public French searchFrench(long id) {
+		return frenchRepository.findById(id);
 	}
 
-	public French createUser(FrenchCreateRequest request) {
-		French user = new French(request.getName(), passwordEncoder.encode(request.getPassword()), request.getEmail(), request.getAge(), request.getGender());
-		return userRepository.saveAndFlush(user);
+	public French create(FrenchCreateRequest request) {
+		French french = new French(request.getName(), passwordEncoder.encode(request.getPassword()), request.getEmail(), request.getAddress());
+		return frenchRepository.saveAndFlush(french);
 	}
 
-	public French updateUser(FrenchUpdateRequest request, long id) {
-		French user = userRepository.findById(id);
-		user.setName(request.getName());
-		user.setEmail(request.getEmail());
-		user.setAge(request.getAge());
-		user.setGender(request.getGender());
+	public French update(FrenchUpdateRequest request, long id) {
+		French french = frenchRepository.findById(id);
+		french.setName(request.getName());
+		french.setEmail(request.getEmail());
+		french.setAddress(request.getAddress());
 
-		return userRepository.saveAndFlush(user);
+		return frenchRepository.saveAndFlush(french);
 	}
 
-	public String deleteUser(Long id){
-		French user = userRepository.findById(id);
-		userRepository.delete(user);
-		return user.getName();
+	public String delete(Long id){
+		French french = frenchRepository.findById(id);
+		frenchRepository.delete(french);
+		return french.getName();
 	}
 }

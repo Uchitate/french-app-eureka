@@ -9,6 +9,6 @@ public class LoginController {
 
 	@RequestMapping
 	public String login() {
-		return "user/login";
+		return "french/login";
 	}
 }
