@@ -1,7 +1,7 @@
-package co.jp.tagbangers.controller.user;
+package co.jp.tagbangers.controller.french;
 
-import co.jp.tagbangers.core.entity.User;
-import co.jp.tagbangers.core.service.UserService;
+import co.jp.tagbangers.core.entity.French;
+import co.jp.tagbangers.core.service.FrenchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,37 +15,37 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/users")
-public class UserSearchController {
+public class FrenchSearchController {
 
 	public static final String FORM_MODEL_KEY = "form";
 
 	@Autowired
-	private UserService userService;
+	private FrenchService userService;
 
 	@ModelAttribute(FORM_MODEL_KEY)
-	public UserSearchForm setUserSearchFrom() {
-		return new UserSearchForm();
+	public FrenchSearchForm setUserSearchFrom() {
+		return new FrenchSearchForm();
 	}
 
 	@ModelAttribute("genders")
-	public User.Gender[] setupGender() {
-		User.Gender[] genders = User.Gender.values();
+	public French.Gender[] setupGender() {
+		French.Gender[] genders = French.Gender.values();
 //		return Arrays.copyOfRange(genders, 0, genders.length);
 		return genders;
 	}
 
 	@GetMapping
 	public String index(Model model) {
-		List<User> users = userService.allUsers();
+		List<French> users = userService.allUsers();
 		model.addAttribute("users", users);
 		return "user/search";
 	}
 
 	@PostMapping
 	public String search(
-			@Validated @ModelAttribute(FORM_MODEL_KEY) UserSearchForm form,
+			@Validated @ModelAttribute(FORM_MODEL_KEY) FrenchSearchForm form,
 			Model model) {
-		List<User> users = userService.searchUsers(form.toUserSearchRequest());
+		List<French> users = userService.searchUsers(form.toUserSearchRequest());
 		model.addAttribute("users", users);
 		return "user/search";
 	}

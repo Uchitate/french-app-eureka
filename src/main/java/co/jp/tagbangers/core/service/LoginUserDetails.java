@@ -1,6 +1,6 @@
 package co.jp.tagbangers.core.service;
 
-import co.jp.tagbangers.core.entity.User;
+import co.jp.tagbangers.core.entity.French;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -12,9 +12,9 @@ import org.springframework.security.core.authority.AuthorityUtils;
 @Setter
 public class LoginUserDetails extends org.springframework.security.core.userdetails.User {
 
-	private final User user;
+	private final French user;
 
-	public LoginUserDetails(User user) {
+	public LoginUserDetails(French user) {
 
 		// ROLE_USERというロールのみ持つ権限を作成する
 		super(user.getName(), user.getPassword(), AuthorityUtils.createAuthorityList("ROLE_USER"));

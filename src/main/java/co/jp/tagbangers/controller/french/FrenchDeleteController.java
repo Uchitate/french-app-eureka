@@ -1,6 +1,6 @@
-package co.jp.tagbangers.controller.user;
+package co.jp.tagbangers.controller.french;
 
-import co.jp.tagbangers.core.service.UserService;
+import co.jp.tagbangers.core.service.FrenchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,10 +10,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/users/delete/{id}")
-public class UserDeleteController {
+public class FrenchDeleteController {
 
 	@Autowired
-	UserService userService;
+	FrenchService userService;
 
 	@DeleteMapping
 	public String delete(

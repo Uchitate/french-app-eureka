@@ -1,7 +1,7 @@
-package co.jp.tagbangers.controller.user;
+package co.jp.tagbangers.controller.french;
 
-import co.jp.tagbangers.core.entity.User;
-import co.jp.tagbangers.core.service.UserService;
+import co.jp.tagbangers.core.entity.French;
+import co.jp.tagbangers.core.service.FrenchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,36 +17,36 @@ import java.util.Arrays;
 
 @Controller
 @RequestMapping("/users/new")
-public class UserCreateController {
+public class FrenchCreateController {
 
 	public static final String FORM_MODEL_KEY = "form";
 
 	public static final String ERRORS_MODEL_KEYS = BindingResult.MODEL_KEY_PREFIX + FORM_MODEL_KEY;
 
 	@Autowired
-	UserService userService;
+	FrenchService userService;
 
 	@ModelAttribute(FORM_MODEL_KEY)
-	public UserCreateForm setupUserCreateForm() {
-		return new UserCreateForm();
+	public FrenchCreateForm setupUserCreateForm() {
+		return new FrenchCreateForm();
 	}
 
 	@ModelAttribute("genders")
-	public User.Gender[] setupGender() {
-		User.Gender[] genders = User.Gender.values();
+	public French.Gender[] setupGender() {
+		French.Gender[] genders = French.Gender.values();
 		return Arrays.copyOfRange(genders, 0, genders.length);
 	}
 
 	@GetMapping
 	public String input(Model model) {
-		UserCreateForm form = (UserCreateForm) model.asMap().get(FORM_MODEL_KEY);
+		FrenchCreateForm form = (FrenchCreateForm) model.asMap().get(FORM_MODEL_KEY);
 		model.addAttribute("form", form);
 		return "user/create";
 	}
 
 	@PostMapping
 	public String save(
-			@Validated @ModelAttribute(FORM_MODEL_KEY) UserCreateForm form,
+			@Validated @ModelAttribute(FORM_MODEL_KEY) FrenchCreateForm form,
 			BindingResult errors,
 			RedirectAttributes redirectAttributes) {
 		redirectAttributes.addFlashAttribute(FORM_MODEL_KEY, form);
@@ -54,7 +54,7 @@ public class UserCreateController {
 		if (errors.hasErrors()) {
 			return "redirect:/users/new?error";
 		}
-		User savedUser = userService.createUser(form.toUserCreateRequest());
+		French savedUser = userService.createUser(form.toUserCreateRequest());
 		redirectAttributes.getFlashAttributes().clear();
 		redirectAttributes.addFlashAttribute("savedUser", savedUser);
 

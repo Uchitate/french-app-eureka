@@ -1,7 +1,7 @@
-package co.jp.tagbangers.controller.user;
+package co.jp.tagbangers.controller.french;
 
-import co.jp.tagbangers.core.entity.User;
-import co.jp.tagbangers.core.model.UserUpdateRequest;
+import co.jp.tagbangers.core.entity.French;
+import co.jp.tagbangers.core.model.FrenchUpdateRequest;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Email;
@@ -12,7 +12,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-public class UserEditForm implements Serializable {
+public class FrenchEditForm implements Serializable {
 
 	@NotEmpty
 	private String name;
@@ -23,20 +23,20 @@ public class UserEditForm implements Serializable {
 	private Integer age;
 
 	@NotNull
-	private User.Gender gender;
+	private French.Gender gender;
 
-	public UserEditForm() {
+	public FrenchEditForm() {
 	}
 
-	public UserEditForm(User user) {
+	public FrenchEditForm(French user) {
 		this.name = user.getName();
 		this.email = user.getEmail();
 		this.age = user.getAge();
 		this.gender = user.getGender();
 	}
 
-	public UserUpdateRequest toUserUpdateRequest() {
-		UserUpdateRequest request = new UserUpdateRequest();
+	public FrenchUpdateRequest toUserUpdateRequest() {
+		FrenchUpdateRequest request = new FrenchUpdateRequest();
 		request.setName(getName());
 		request.setEmail(getEmail());
 		request.setAge(getAge());

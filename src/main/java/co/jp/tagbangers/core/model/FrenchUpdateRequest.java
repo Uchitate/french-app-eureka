@@ -1,12 +1,12 @@
 package co.jp.tagbangers.core.model;
 
-import co.jp.tagbangers.core.entity.User;
+import co.jp.tagbangers.core.entity.French;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class UserUpdateRequest {
+public class FrenchUpdateRequest {
 
 	private Long id;
 
@@ -16,5 +16,5 @@ public class UserUpdateRequest {
 
 	private Integer age;
 
-	private User.Gender gender;
+	private French.Gender gender;
 }

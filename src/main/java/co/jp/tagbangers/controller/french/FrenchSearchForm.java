@@ -1,7 +1,7 @@
-package co.jp.tagbangers.controller.user;
+package co.jp.tagbangers.controller.french;
 
-import co.jp.tagbangers.core.entity.User;
-import co.jp.tagbangers.core.model.UserSearchRequest;
+import co.jp.tagbangers.core.entity.French;
+import co.jp.tagbangers.core.model.FrenchSearchRequest;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-public class UserSearchForm implements Serializable {
+public class FrenchSearchForm implements Serializable {
 
 	private String name;
 
@@ -17,10 +17,10 @@ public class UserSearchForm implements Serializable {
 //
 //	private Integer ageEnd;
 //
-	private User.Gender gender;
+	private French.Gender gender;
 
-	public UserSearchRequest toUserSearchRequest() {
-		UserSearchRequest request = new UserSearchRequest();
+	public FrenchSearchRequest toUserSearchRequest() {
+		FrenchSearchRequest request = new FrenchSearchRequest();
 		request.setName(getName());
 //		request.setAgeStart(getAgeStart());
 //		request.setAgeEnd(getAgeEnd());

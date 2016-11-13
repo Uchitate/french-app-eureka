@@ -1,7 +1,7 @@
 package co.jp.tagbangers.core.repository;
 
-import co.jp.tagbangers.core.entity.User;
-import co.jp.tagbangers.core.model.UserSearchRequest;
+import co.jp.tagbangers.core.entity.French;
+import co.jp.tagbangers.core.model.FrenchSearchRequest;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
@@ -13,17 +13,17 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepositoryImpl implements UserRepositoryCustom {
+public class FrenchRepositoryImpl implements FrenchRepositoryCustom {
 
 	@PersistenceContext
 	EntityManager entityManager;
 
 	@Override
-	public List<User> search(UserSearchRequest request) {
-		List<User> users;
+	public List<French> search(FrenchSearchRequest request) {
+		List<French> users;
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<User> query = builder.createQuery(User.class);
-		Root<User> root = query.from(User.class);
+		CriteriaQuery<French> query = builder.createQuery(French.class);
+		Root<French> root = query.from(French.class);
 
 		List<Predicate> where = new ArrayList<>();
 		if (StringUtils.hasText(request.getName())) {

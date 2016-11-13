@@ -20,15 +20,11 @@ public class French extends AbstractEntity<Long> {
 	@Column(length = 100, nullable = false)
 	private String name;
 
-	@Column(length = 50, nullable = false)
-	private Integer zip;
+	@Column(length = 100, nullable = false)
+	private String password;
 
-	@Column(length = 100, nullable = true)
-	private String line1;
+	@Column(length = 100)
+	private String email;
 
-	private String line2;
-
-	private String line3;
-
-	private String other;
+	private String address;
 }

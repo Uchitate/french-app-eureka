@@ -1,7 +1,7 @@
-package co.jp.tagbangers.controller.user;
+package co.jp.tagbangers.controller.french;
 
-import co.jp.tagbangers.core.entity.User;
-import co.jp.tagbangers.core.service.UserService;
+import co.jp.tagbangers.core.entity.French;
+import co.jp.tagbangers.core.service.FrenchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/users/edit/{id}")
-public class UserEditController {
+public class FrenchEditController {
 
 	public static final String TARGET_ENTITY_KEY = "user";
 	public static final String FORM_MODEL_KEY = "form";
@@ -22,17 +22,17 @@ public class UserEditController {
 	public static final String ERRORS_MODEL_KEYS = BindingResult.MODEL_KEY_PREFIX + FORM_MODEL_KEY;
 
 	@Autowired
-	UserService userService;
+	FrenchService userService;
 
 	@ModelAttribute(TARGET_ENTITY_KEY)
-	public User setupUser(@PathVariable long id) {
-		User user = userService.searchUser(id);
+	public French setupUser(@PathVariable long id) {
+		French user = userService.searchUser(id);
 		return user;
 	}
 
 	@ModelAttribute("genders")
-	public User.Gender[] setupGender() {
-		User.Gender[] genders = User.Gender.values();
+	public French.Gender[] setupGender() {
+		French.Gender[] genders = French.Gender.values();
 //		return Arrays.copyOfRange(genders, 0, genders.length);
 		return genders;
 	}
@@ -40,9 +40,9 @@ public class UserEditController {
 
 	@GetMapping
 	public String input(Model model) {
-		User user = (User) model.asMap().get(TARGET_ENTITY_KEY);
-		UserEditForm form = (UserEditForm) model.asMap().get(FORM_MODEL_KEY);
-		form = Optional.ofNullable(form).orElse(new UserEditForm(user));
+		French user = (French) model.asMap().get(TARGET_ENTITY_KEY);
+		FrenchEditForm form = (FrenchEditForm) model.asMap().get(FORM_MODEL_KEY);
+		form = Optional.ofNullable(form).orElse(new FrenchEditForm(user));
 
 		model.addAttribute(FORM_MODEL_KEY, form);
 		model.addAttribute(TARGET_ENTITY_KEY, user);
@@ -51,7 +51,7 @@ public class UserEditController {
 
 	@PostMapping
 	public String update(
-			@Validated @ModelAttribute(FORM_MODEL_KEY) UserEditForm form,
+			@Validated @ModelAttribute(FORM_MODEL_KEY) FrenchEditForm form,
 			@PathVariable Long id,
 			BindingResult errors,
 			RedirectAttributes redirectAttributes) {
@@ -61,7 +61,7 @@ public class UserEditController {
 			return "redirect:/users/new?error";
 		}
 
-		User updatedUser = userService.updateUser(form.toUserUpdateRequest(), id);
+		French updatedUser = userService.updateUser(form.toUserUpdateRequest(), id);
 		redirectAttributes.getFlashAttributes().clear();
 		redirectAttributes.addFlashAttribute("updatedUser", updatedUser);
 
