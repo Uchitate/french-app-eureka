@@ -26,11 +26,6 @@ public class FrenchCreateController {
 	@Autowired
 	FrenchService frenchService;
 
-	@ModelAttribute(FORM_MODEL_KEY)
-	public FrenchCreateForm setupFrenchCreateForm() {
-		return new FrenchCreateForm();
-	}
-
 	@GetMapping
 	public String input(Model model) {
 		FrenchCreateForm form = (FrenchCreateForm) model.asMap().get(FORM_MODEL_KEY);

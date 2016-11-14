@@ -1,6 +1,7 @@
 package co.jp.tagbangers.core.repository;
 
 import co.jp.tagbangers.core.entity.French;
+import co.jp.tagbangers.core.entity.French_;
 import co.jp.tagbangers.core.model.FrenchSearchRequest;
 import org.springframework.util.StringUtils;
 
@@ -20,14 +21,13 @@ public class FrenchRepositoryImpl implements FrenchRepositoryCustom {
 
 	@Override
 	public List<French> search(FrenchSearchRequest request) {
-		List<French> frenches;
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<French> query = builder.createQuery(French.class);
 		Root<French> root = query.from(French.class);
 
 		List<Predicate> where = new ArrayList<>();
 		if (StringUtils.hasText(request.getName())) {
-//			where.add(builder.equal(root.get(French_.name), request.getName()));
+			where.add(builder.equal(root.get(French_.name), request.getName()));
 		}
 
 		query.where(where.toArray(new Predicate[where.size()]));
