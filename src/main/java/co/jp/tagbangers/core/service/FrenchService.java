@@ -1,7 +1,6 @@
 package co.jp.tagbangers.core.service;
 
 import co.jp.tagbangers.core.entity.French;
-import co.jp.tagbangers.core.model.FrenchCreateRequest;
 import co.jp.tagbangers.core.model.FrenchSearchRequest;
 import co.jp.tagbangers.core.model.FrenchUpdateRequest;
 import co.jp.tagbangers.core.repository.FrenchRepository;
@@ -30,11 +29,6 @@ public class FrenchService {
 
 	public French searchFrench(long id) {
 		return frenchRepository.findById(id);
-	}
-
-	public French create(FrenchCreateRequest request) {
-		French french = new French(request.getName(), passwordEncoder.encode(request.getPassword()), request.getEmail(), request.getAddress());
-		return frenchRepository.saveAndFlush(french);
 	}
 
 	public French update(FrenchUpdateRequest request, long id) {
